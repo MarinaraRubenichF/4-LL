@@ -1,6 +1,6 @@
-# WebRural
+# WebExperimentos
 
-WebRural é um site de apoio a professores e acadêmicos em experimentos para selecionar as melhores plantas de diversas culturas, eliminando o uso de papel e o trabalho de passar os dados do papel para planilhas eletrônicas.
+WebExperimentos é um site de apoio a professores e acadêmicos em experimentos para selecionar as melhores plantas de diversas culturas, eliminando o uso de papel e o trabalho de passar os dados do papel para planilhas eletrônicas.
 
 Neste repositório se encontrarão todos os códigos do projeto, bem como o cronograma de entregas do mesmo
 para a disciplina de Projeto de Software II da Universidade Federal de Santa Maria.
