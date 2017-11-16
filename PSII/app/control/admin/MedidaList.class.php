@@ -24,6 +24,7 @@ class MedidaList extends TStandardList
         parent::setDefaultOrder('med_id', 'asc');         // defines the default order
         parent::addFilterField('med_id', '=', 'med_id'); // filterField, operator, formField
         parent::addFilterField('med_exp_id', 'like', 'med_exp_id'); // filterField, operator, formField
+        parent::addFilterField('med_blc_id', 'like', 'med_blc_id'); // filterField, operator, formField
         parent::addFilterField('med_par_id', 'like', 'med_par_id'); // filterField, operator, formField
         parent::addFilterField('med_plt_id', '=', 'med_plt_id'); // filterField, operator, formField
         parent::addFilterField('med_fen_id', 'like', 'med_fen_id'); // filterField, operator, formField
@@ -44,6 +45,7 @@ class MedidaList extends TStandardList
         // create the form fields
         $med_id = new TEntry('med_id');
         $med_exp_id = new TDBCombo('med_exp_id','webrural','Experimento','exp_id','exp_nome','', $crit);
+        $med_blc_id = new TDBCombo('med_blc_id','webrural','Bloco','blc_id','blc_nome');
         $med_par_id = new TDBCombo('med_par_id','webrural','Parcela','par_id','par_nome');
         $med_plt_id = new TDBCombo('med_plt_id','webrural','Planta','plt_id','plt_nome');
         $med_fen_id = new TDBCombo('med_fen_id','webrural','Fenologia','fen_id','fen_fenologia');
@@ -51,6 +53,7 @@ class MedidaList extends TStandardList
         // add the fields
         $this->form->addQuickField('Id', $med_id, '20%');
         $this->form->addQuickField('Experimento', $med_exp_id, '50%');
+        $this->form->addQuickField('Bloco', $med_blc_id, '50%');
         $this->form->addQuickField('Parcela', $med_par_id, '50%');
         $this->form->addQuickField('Planta', $med_plt_id, '50%');
         $this->form->addQuickField('Fenologia', $med_fen_id, '50%');
@@ -68,6 +71,7 @@ class MedidaList extends TStandardList
 
         $column_experimento = $this->datagrid->addQuickColumn('Experimento', 'experimento->exp_nome', 'center', 100);
         $column_parcela =  $this->datagrid->addQuickColumn( 'Parcela', 'parcela->par_nome', 'center', 100);
+        $column_bloco =  $this->datagrid->addQuickColumn( 'Bloco', 'bloco->blc_nome', 'center', 100);
         $column_planta =  $this->datagrid->addQuickColumn('Planta', 'planta->plt_nome', 'center', 100);
         $column_altura =  $this->datagrid->addQuickColumn('Altura da Planta', 'med_alt_planta', 'center', 100);
         $column_largura = $this->datagrid->addQuickColumn('Largura da Folha', 'med_larg_folha', 'center', 100);

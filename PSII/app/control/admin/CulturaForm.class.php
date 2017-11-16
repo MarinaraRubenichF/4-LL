@@ -27,7 +27,7 @@ class CulturaForm extends TStandardForm
         $name = new TEntry('clt_nome');
         
         // add the fields
-        $this->form->addFields( [new TLabel('Id')], [$id] );
+        //$this->form->addFields( [new TLabel('Id')], [$id] );
         $this->form->addFields( [new TLabel(_t('Name'))], [$name] );
         $id->setEditable(FALSE);
         $id->setSize('30%');

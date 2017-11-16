@@ -28,7 +28,7 @@ class ParcelaForm extends TStandardForm
         $par_desc = new TText('par_desc');
         
         // add the fields
-        $this->form->addFields( [new TLabel('Id')], [$par_id] );
+        //$this->form->addFields( [new TLabel('Id')], [$par_id] );
         $this->form->addFields( [new TLabel('Nome')], [$par_nome] );
         $this->form->addFields( [new TLabel('Descrição')], [$par_desc] );
         
