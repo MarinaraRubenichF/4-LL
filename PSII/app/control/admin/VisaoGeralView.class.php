@@ -53,6 +53,8 @@ class VisaoGeralView extends TStandardList
         $fenologia = $this->datagrid->addQuickColumn('Fenologia','fenologia->fen_fenologia', 'left');
         $imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
+        $data_hora->setTransformer(array($this, 'formatDate'));
+
         $this->form->addQuickAction('CSV',  new TAction(array($this, 'onExportCSV')), 'fa:file-excel-o' );
 
         // aplica transformações
@@ -90,5 +92,11 @@ class VisaoGeralView extends TStandardList
     function onExportCSV()
     {
         $this->onSearch();
+    }
+
+    public function formatDate($data_hora, $object)
+    {
+        $dt = new DateTime($data_hora);
+        return $dt->format('d/m/Y h:i');
     }
 }

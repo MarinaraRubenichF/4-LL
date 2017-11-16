@@ -50,22 +50,22 @@ class MedidaForm extends TStandardForm
         $med_data->setValue( date('Y-m-d') );
 
         // add the fields
-        $this->form->addQuickField('ID', $med_id, '20%');
-        $this->form->addQuickField('Experimento', $med_exp_id, '50%');
-        $this->form->addQuickField('Parcela', $med_par_id, '50%');
-        $this->form->addQuickField('Planta', $med_plt_id, '50%');
-        $this->form->addQuickField('Altura da Planta (cm)', $med_alt_planta, '50%');
-        $this->form->addQuickField('Largura da Folha (cm)', $med_larg_folha, '50%');
-        $this->form->addQuickField('Tamanho da Folha (cm)', $med_tam_folha, '50%');
-        $this->form->addQuickField('Fenologia', $med_fen_id, '50%');
-        $this->form->addQuickField('Data', $med_data, '50%');
-        $this->form->addQuickField('Imagem', $med_imagem, '50%');
+        //$this->form->addQuickField('ID', $med_id, '20%');
+        $this->form->addQuickField('Experimento', $med_exp_id, '90%');
+        $this->form->addQuickField('Parcela', $med_par_id, '90%');
+        $this->form->addQuickField('Planta', $med_plt_id, '90%');
+        $this->form->addQuickField('Altura da Planta (cm)', $med_alt_planta, '90%');
+        $this->form->addQuickField('Largura da Folha (cm)', $med_larg_folha, '90%');
+        $this->form->addQuickField('Tamanho da Folha (cm)', $med_tam_folha, '90%');
+        $this->form->addQuickField('Fenologia', $med_fen_id, '90%');
+        $this->form->addQuickField('Data', $med_data, '90%');
+        $this->form->addQuickField('Imagem', $med_imagem, '90%');
 
         $med_id->setEditable(FALSE);
 
         $this->frame = new TElement('div');
         $this->frame->id = 'photo';
-        $this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
+        //$this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
         $row = $this->form->addRow();
         $row->addCell('');
         $row->addCell($this->frame);
@@ -83,7 +83,7 @@ class MedidaForm extends TStandardForm
         
         // vertical box container
         $container = new TVBox;
-        $container->style = 'width: 90%';
+        $container->style = 'width: 100%';
         $container->add(new TXMLBreadCrumb('menu.xml', 'MedidaList'));
         $container->add($this->form);
         

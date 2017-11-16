@@ -80,6 +80,9 @@ class ExperimentoList extends TStandardList
         $column_espac = $this->datagrid->addQuickColumn('Espaçamento', 'exp_espac', 'center', 50);
         $column_desc = $this->datagrid->addQuickColumn('Descrição', 'exp_desc', 'center', 250);
         $column_local = $this->datagrid->addQuickColumn('Local', 'local->lcl_nome', 'center', 100);
+
+        $column_dt_hr->setTransformer(array($this, 'formatDate'));
+
         /*$column_imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
         // aplica transformações
@@ -131,5 +134,11 @@ class ExperimentoList extends TStandardList
 
     public function onEdit($param)
     {
+    }
+
+    public function formatDate($column_dt_hr, $object)
+    {
+        $dt = new DateTime($column_dt_hr);
+        return $dt->format('d/m/Y h:i');
     }
 }

@@ -72,7 +72,11 @@ class MedidaList extends TStandardList
         $column_altura =  $this->datagrid->addQuickColumn('Altura da Planta', 'med_alt_planta', 'center', 100);
         $column_largura = $this->datagrid->addQuickColumn('Largura da Folha', 'med_larg_folha', 'center', 100);
         $column_tamanho =  $this->datagrid->addQuickColumn('Tamanho da Folha', 'med_tam_folha', 'center', 100);
+        $column_data = $this->datagrid->addQuickColumn('Data', 'med_data', 'center', 100);
         $column_fenologia = $this->datagrid->addQuickColumn('Fenologia', 'fenologia->fen_fenologia', 'center', 100);
+        //$column_data->setMask("dd/mm/yyyy"); 
+        $column_data->setTransformer(array($this, 'formatDate'));
+
         /*$column_imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
         // aplica transformações
@@ -120,5 +124,11 @@ class MedidaList extends TStandardList
         $container->add($this->pageNavigation);
         
         parent::add($container);
+    }
+
+    public function formatDate($column_data, $object)
+    {
+        $dt = new DateTime($column_data);
+        return $dt->format('d/m/Y');
     }
 }
