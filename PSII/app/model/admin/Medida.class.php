@@ -23,6 +23,7 @@ class Medida extends TRecord
         parent::__construct($id, $callObjectLoad);
         parent::addAttribute('med_exp_id');
         parent::addAttribute('med_par_id');
+        parent::addAttribute('med_blc_id');
         parent::addAttribute('med_plt_id');
         parent::addAttribute('med_alt_planta');
         parent::addAttribute('med_larg_folha');
@@ -95,5 +96,21 @@ class Medida extends TRecord
     
         // returns the associated object
         return $this->planta;
+    }
+
+    public function set_bloco(Bloco $object)
+    {
+        $this->bloco = $object;
+        $this->med_blc_id = $object->id;
+    }
+
+    public function get_bloco()
+    {
+        // loads the associated object
+        if (empty($this->bloco))
+            $this->bloco = new Bloco($this->med_blc_id);
+    
+        // returns the associated object
+        return $this->bloco;
     }
 }
