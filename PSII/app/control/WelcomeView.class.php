@@ -45,6 +45,8 @@ class WelcomeView extends TStandardList
         $parcelas = $this->datagrid->addQuickColumn('Nº Parcelas','= {exp_num_lin} * {exp_num_col}', 'left');
         $imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
+        $data_hora->setTransformer(array($this, 'formatDate'));
+
         // aplica transformações
         $imagem->setTransformer(function($image, $object) {
             //return new TImage($object->exp_imagem);
@@ -76,5 +78,11 @@ class WelcomeView extends TStandardList
         $container->add($this->pageNavigation);
         
         parent::add($container);
+    }
+
+    public function formatDate($data_hora, $object)
+    {
+        $dt = new DateTime($data_hora);
+        return $dt->format('d/m/Y h:i');
     }
 }
