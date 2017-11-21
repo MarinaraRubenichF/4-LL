@@ -1,4 +1,9 @@
 <menu>
+    <menuitem label='Página Inicial'>
+       <icon>fa:home fa-fw</icon>
+       <action>WelcomeView</action>
+    </menuitem>
+
     <menuitem label='_t{Administration}'>
         <icon>fa:university fa-fw</icon>
         <menu>
