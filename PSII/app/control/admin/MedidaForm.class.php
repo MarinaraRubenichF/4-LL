@@ -30,6 +30,7 @@ class MedidaForm extends TStandardForm
         // create the form fields
         $med_id = new TEntry('med_id');
         $med_exp_id = new TDBCombo('med_exp_id','webrural','Experimento','exp_id','exp_nome','exp_nome', $crit);
+        $med_blc_id = new TDBCombo('med_blc_id','webrural','Bloco','blc_id','blc_nome');
         $med_par_id = new TDBCombo('med_par_id','webrural','Parcela','par_id','par_nome');
         $med_plt_id = new TDBCombo('med_plt_id','webrural','Planta','plt_id','plt_nome');
         $med_alt_planta = new TEntry('med_alt_planta');
@@ -50,22 +51,23 @@ class MedidaForm extends TStandardForm
         $med_data->setValue( date('Y-m-d') );
 
         // add the fields
-        $this->form->addQuickField('ID', $med_id, '20%');
-        $this->form->addQuickField('Experimento', $med_exp_id, '50%');
-        $this->form->addQuickField('Parcela', $med_par_id, '50%');
-        $this->form->addQuickField('Planta', $med_plt_id, '50%');
-        $this->form->addQuickField('Altura da Planta (cm)', $med_alt_planta, '50%');
-        $this->form->addQuickField('Largura da Folha (cm)', $med_larg_folha, '50%');
-        $this->form->addQuickField('Tamanho da Folha (cm)', $med_tam_folha, '50%');
-        $this->form->addQuickField('Fenologia', $med_fen_id, '50%');
-        $this->form->addQuickField('Data', $med_data, '50%');
-        $this->form->addQuickField('Imagem', $med_imagem, '50%');
+        //$this->form->addQuickField('ID', $med_id, '20%');
+        $this->form->addQuickField('Experimento', $med_exp_id, '90%');
+        $this->form->addQuickField('Parcela', $med_par_id, '90%');
+        $this->form->addQuickField('Bloco', $med_blc_id, '90%');
+        $this->form->addQuickField('Planta', $med_plt_id, '90%');
+        $this->form->addQuickField('Altura da Planta (cm)', $med_alt_planta, '90%');
+        $this->form->addQuickField('Largura da Folha (cm)', $med_larg_folha, '90%');
+        $this->form->addQuickField('Tamanho da Folha (cm)', $med_tam_folha, '90%');
+        $this->form->addQuickField('Fenologia', $med_fen_id, '90%');
+        $this->form->addQuickField('Data', $med_data, '90%');
+        $this->form->addQuickField('Imagem', $med_imagem, '90%');
 
         $med_id->setEditable(FALSE);
 
         $this->frame = new TElement('div');
         $this->frame->id = 'photo';
-        $this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
+        //$this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
         $row = $this->form->addRow();
         $row->addCell('');
         $row->addCell($this->frame);
@@ -73,7 +75,8 @@ class MedidaForm extends TStandardForm
         // create the form actions
         $this->form->addQuickAction(_t('Save'), new TAction(array($this, 'onSave')), 'fa:floppy-o');
         $this->form->addQuickAction('Nova Medida',  new TAction(array($this, 'onEdit')), 'fa:eraser red');
-        $this->form->addQuickAction('Nova Parcela',  new TAction(array('ParcelaForm', 'onEdit')), 'fa:plus-circle red');
+        $this->form->addQuickAction('Nova Parcela',  new TAction(array('ParcelaForm', 'onEdit')), 'fa:plus-circle red');      
+        $this->form->addQuickAction('Novo Bloco',  new TAction(array('BlocoForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Nova Planta',  new TAction(array('PlantaForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Nova Fenologia',  new TAction(array('FenologiaForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Ir para a Listagem de Medidas',new TAction(array('MedidaList','onReload')),'fa:table blue');
@@ -83,7 +86,7 @@ class MedidaForm extends TStandardForm
         
         // vertical box container
         $container = new TVBox;
-        $container->style = 'width: 90%';
+        $container->style = 'width: 100%';
         $container->add(new TXMLBreadCrumb('menu.xml', 'MedidaList'));
         $container->add($this->form);
         

@@ -46,12 +46,15 @@ class VisaoGeralView extends TStandardList
         $cultura = $this->datagrid->addQuickColumn('Cultura', 'experimento->cultura->clt_nome', 'left'); 
         $parcelas = $this->datagrid->addQuickColumn('Nº Parcelas','= {experimento->exp_num_lin} * {experimento->exp_num_col}', 'left');
         $parcela = $this->datagrid->addQuickColumn('Parcela','parcela->par_nome', 'left');
+        $bloco = $this->datagrid->addQuickColumn('Bloco','bloco->blc_nome', 'left');
         $planta = $this->datagrid->addQuickColumn('Planta','planta->plt_nome', 'left');
         $alt_planta = $this->datagrid->addQuickColumn('Altura da Planta','med_alt_planta', 'left');
         $larg_folha = $this->datagrid->addQuickColumn('Largura da Folha','med_larg_folha', 'left');
         $tam_folha = $this->datagrid->addQuickColumn('Tamanho da Folha','med_tam_folha', 'left');
         $fenologia = $this->datagrid->addQuickColumn('Fenologia','fenologia->fen_fenologia', 'left');
         $imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
+
+        $data_hora->setTransformer(array($this, 'formatDate'));
 
         $this->form->addQuickAction('CSV',  new TAction(array($this, 'onExportCSV')), 'fa:file-excel-o' );
 
@@ -90,5 +93,11 @@ class VisaoGeralView extends TStandardList
     function onExportCSV()
     {
         $this->onSearch();
+    }
+
+    public function formatDate($data_hora, $object)
+    {
+        $dt = new DateTime($data_hora);
+        return $dt->format('d/m/Y h:i');
     }
 }

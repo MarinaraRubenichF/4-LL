@@ -19,13 +19,13 @@ class ExperimentoForm extends TStandardForm
         $this->setActiveRecord('Experimento');     // defines the active record
         
         // creates the form
-         $this->form = new TQuickForm('form_Experimento');
+        $this->form = new TQuickForm('form_Experimento');
         $this->form->class = 'tform';
         $this->form->setFormTitle('Experimentos');
-        
+
         //if(TSession::getValue('userid') != 1){
-            $crit = new TCriteria();
-            $crit->add(new TFilter('lgn_id','in','(SELECT exp_usr_id from experimentos where exp_usr_id = ' . TSession::getValue('userid') . ')'));
+        $crit = new TCriteria();
+        $crit->add(new TFilter('lgn_id','in','(SELECT exp_usr_id from experimentos where exp_usr_id = ' . TSession::getValue('userid') . ')'));
 
         // create the form fields
         $exp_id = new TEntry('exp_id');
@@ -51,30 +51,24 @@ class ExperimentoForm extends TStandardForm
         $exp_imagem->setCompleteAction(new TAction(array($this, 'onComplete')));
 
         // add the fields
-        $this->form->addQuickField('Id', $exp_id, '20%');
-        $this->form->addQuickField('Nome', $exp_nome, '50%');
-        $this->form->addQuickField('Descrição', $exp_desc, '50%');
-        $this->form->addQuickField('Usuário', $exp_usr_id, '50%');
-        $this->form->addQuickField('Data/hora', $exp_dt_hr, '50%');
-        $this->form->addQuickField('Cultura', $exp_clt_id, '50%');
-        $this->form->addQuickField('Local', $exp_local, '50%');
-        $this->form->addQuickField('Tipo', $exp_tip_id, '50%');
-        $this->form->addQuickField('Linhas / Tratamentos', $exp_num_lin, '20%');
-        $this->form->addQuickField('Colunas / Repetições', $exp_num_col, '20%');
-        $this->form->addQuickField('Espaçamento', $exp_espac, '20%');
-        $this->form->addQuickField('Imagem', $exp_imagem, '50%');
-
-        /*$this->form->addFields( [new TLabel('Id')], [$exp_id, ('Nome'), $exp_nome] );
-        $this->form->addFields( [new TLabel('Descrição')], [$exp_desc] );
-        $this->form->addFields( [new TLabel('Usuário')], [$exp_usr_id, ('Data/hora'), $exp_dt_hr] );
-        $this->form->addFields( [new TLabel('Cultura')], [$exp_clt_id, ('Local'), $exp_local] );
-        $this->form->addFields([new TLabel('Linhas')], [$exp_num_lin, ('Colunas'), $exp_num_col, ('Espaçamento'), $exp_espac]);*/
+        //$this->form->addQuickField('Id', $exp_id, '20%');
+        $this->form->addQuickField('Nome', $exp_nome, '90%');
+        $this->form->addQuickField('Descrição', $exp_desc, '90%');
+        $this->form->addQuickField('Usuário', $exp_usr_id, '90%');
+        $this->form->addQuickField('Data/hora', $exp_dt_hr, '90%');
+        $this->form->addQuickField('Cultura', $exp_clt_id, '90%');
+        $this->form->addQuickField('Local', $exp_local, '90%');
+        $this->form->addQuickField('Tipo', $exp_tip_id, '90%');
+        $this->form->addQuickField('Linhas / Tratamentos', $exp_num_lin, '30%');
+        $this->form->addQuickField('Colunas / Repetições', $exp_num_col, '30%');
+        $this->form->addQuickField('Espaçamento', $exp_espac, '30%');
+        $this->form->addQuickField('Imagem', $exp_imagem, '90%');
 
         $exp_id->setEditable(FALSE);
         
         $this->frame = new TElement('div');
         $this->frame->id = 'photo';
-        $this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
+        //$this->frame->style = 'width:300px;height:auto;min-height:150px;border:1px solid gray;padding:4px;';
         $row = $this->form->addRow();
         $row->addCell('');
         $row->addCell($this->frame);
@@ -85,12 +79,12 @@ class ExperimentoForm extends TStandardForm
         $this->form->addQuickAction('Nova Cultura',  new TAction(array('CulturaForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Novo Bloco',  new TAction(array('BlocoForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Novo Local',  new TAction(array('LocalForm', 'onEdit')), 'fa:plus-circle red');
-        $this->form->addQuickAction('Novo Usuário',  new TAction(array('UsuarioForm', 'onEdit')), 'fa:user-plus red');
-        $this->form->addQuickAction('Ir para a Listagem',new TAction(array('ExperimentoList','onReload')),'fa:table blue');
+        //$this->form->addQuickAction('Novo Usuário',  new TDataGridAction(array('UsuarioForm', 'onEdit')), 'fa:user-plus red');
+        $this->form->addQuickAction('Ir para a Listagem',new TDataGridAction(array('ExperimentoList','onReload')),'fa:table blue');
         
         // vertical box container
         $container = new TVBox;
-        $container->style = 'width: 90%';
+        $container->style = 'width: 100%';
         $container->add(new TXMLBreadCrumb('menu.xml', 'ExperimentoForm'));
         $container->add($this->form);
         
