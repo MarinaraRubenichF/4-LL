@@ -1,7 +1,11 @@
--- UFSM
--- Projeto de Software II
--- Marinara Rübenich Fumagalli
--- 2017/2
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: 01-Dez-2017 às 00:35
+-- Versão do servidor: 5.7.14
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -75,13 +79,13 @@ CREATE TABLE `experimentos` (
   `exp_id` int(4) NOT NULL,
   `exp_usr_id` int(4) DEFAULT NULL,
   `exp_nome` varchar(30) NOT NULL,
-  `exp_desc` varchar(200) NOT NULL,
+  `exp_desc` varchar(200) DEFAULT NULL,
   `exp_dt_hr` datetime NOT NULL,
   `exp_lcl_id` int(4) NOT NULL,
   `exp_clt_id` int(4) NOT NULL,
   `exp_num_lin` int(3) NOT NULL,
   `exp_num_col` int(3) NOT NULL,
-  `exp_num_plts` int(10) NOT NULL,
+  `exp_num_plts` int(10) DEFAULT NULL,
   `exp_tip_id` int(5) NOT NULL,
   `exp_espac` float NOT NULL,
   `exp_imagem` varchar(80) DEFAULT NULL
@@ -96,7 +100,22 @@ INSERT INTO `experimentos` (`exp_id`, `exp_usr_id`, `exp_nome`, `exp_desc`, `exp
 (2, 1, 'Experimento 2', 'Novo teste', '2017-10-25 01:33:00', 1, 1, 4, 4, 2, 1, 0.5, 'Milho2.jpg'),
 (3, 2, 'Experimento 3', 'Teste 3.', '2017-10-27 23:46:00', 1, 3, 2, 2, 2, 1, 0.03, ''),
 (4, 1, 'Experimento 4', 'Teste 4', '2017-10-28 01:13:00', 1, 2, 3, 2, 2, 1, 0.06, ''),
-(5, 2, 'Experimento 5', 'Teste 5.', '2017-10-28 01:16:00', 1, 2, 2, 2, 2, 1, 0.05, '');
+(5, 2, 'Experimento 5', 'Teste 5.', '2017-10-28 01:16:00', 1, 2, 2, 2, 2, 1, 0.05, ''),
+(6, 4, 'Jose', 'Milho ', '2017-11-23 16:28:00', 1, 1, 4, 3, NULL, 2, 0.5, NULL),
+(7, 3, 'Exp teste', 'Hshd', '2017-11-23 16:30:00', 1, 1, 2, 3, NULL, 1, 0.2, NULL),
+(8, 5, 'FENOLOGIA MILHO', 'Analisa', '2017-11-23 16:31:00', 1, 1, 5, 6, NULL, 2, 0.5, NULL),
+(9, 3, 'Exp teste', 'Hshd', '2017-11-23 16:30:00', 1, 1, 2, 3, NULL, 1, 0.2, 'images/15114623610331678551177.jpg'),
+(14, 6, 'Teste Marília', 'Teste', '2017-11-28 16:16:00', 1, 2, 2, 5, 2, 2, 2, 'vegetais-ricos-em-proteinas.jpg'),
+(11, 3, 'Expe Teste', 'Olá teste', '2017-11-28 02:39:00', 1, 2, 2, 2, 2, 1, 2, NULL),
+(13, 3, 'Exp teste', 'Hshd', '2017-11-23 16:30:00', 1, 1, 2, 3, 2, 1, 0.2, NULL),
+(19, 6, 'Teste 2', 'Teste', '2017-11-28 18:57:00', 1, 1, 3, 3, 2, 1, 2, NULL),
+(16, NULL, 'Teste Marília', 'Teste', '2017-11-28 16:16:00', 1, 2, 2, 5, 2, 2, 2, NULL),
+(18, NULL, 'Teste Marília', 'Teste', '2017-11-28 16:16:00', 1, 2, 2, 5, 2, 2, 2, NULL),
+(20, NULL, 'Teste 2', 'Teste', '2017-11-28 18:57:00', 1, 1, 3, 3, 2, 1, 2, NULL),
+(21, 6, 'Teste 3', NULL, '2017-11-28 19:02:00', 1, 1, 2, 2, 1, 2, 1.5, 'tmp/TOP-10-SOURCES-OF-VEGETABLE-PROTEIN.jpg'),
+(22, NULL, 'Teste 3', NULL, '2017-11-28 19:02:00', 1, 2, 2, 2, 1, 2, 1.5, 'TOP-10-SOURCES-OF-VEGETABLE-PROTEIN.jpg'),
+(23, 7, 'Teste', 'teste', '2017-11-28 20:17:00', 1, 1, 5, 5, 2, 1, 3, '42060f024720a5985c4ffd05197a6392.jpg'),
+(24, NULL, 'Teste', 'teste', '2017-11-28 20:17:00', 1, 1, 4, 5, 2, 1, 3, '14462908_432634786906790_8863553046394643426_n.jpg');
 
 -- --------------------------------------------------------
 
@@ -187,8 +206,11 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`lgn_id`, `lgn_usr_nome`, `lgn_usuario`, `lgn_senha`, `frontpage_id`, `system_unit_id`, `active`) VALUES
 (1, 'Admin PSII', 'admin', '21232f297a57a5a743894a0e4a801fc3', 10, NULL, 'Y'),
 (2, 'User', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 7, NULL, 'Y'),
-(3, 'Mirta', 'mirta', 'e10adc3949ba59abbe56e057f20f883e', 10, NULL, 'Y'),
-(4, 'Laudenir', 'laudenir', '5f422e7267f776665465e192651302aa', 10, NULL, 'Y');
+(3, 'Mirtaa', 'mirta', '14e1b600b1fd579f47433b88e8d85291', 10, NULL, 'Y'),
+(4, 'Laudenir', 'laudenir', '5f422e7267f776665465e192651302aa', 10, NULL, 'Y'),
+(5, 'Leonardo', 'leonardo', '020e60c6a84db8c5d4c2d56a4e4fe082', 10, NULL, 'Y'),
+(6, 'Marília', 'marilia', 'c4349152f739c809ab12116967962590', 10, NULL, 'Y'),
+(7, 'Teste', 'teste', '698dc19d489c4e4db73e28a713eab07b', 10, NULL, 'Y');
 
 -- --------------------------------------------------------
 
@@ -199,7 +221,7 @@ INSERT INTO `login` (`lgn_id`, `lgn_usr_nome`, `lgn_usuario`, `lgn_senha`, `fron
 CREATE TABLE `medidas` (
   `med_id` int(4) NOT NULL,
   `med_exp_id` int(4) NOT NULL,
-  `med_blc_id` int(5) NOT NULL,
+  `med_blc_id` int(5) DEFAULT NULL,
   `med_par_id` int(4) NOT NULL,
   `med_plt_id` int(4) NOT NULL,
   `med_alt_planta` float NOT NULL,
@@ -215,15 +237,29 @@ CREATE TABLE `medidas` (
 --
 
 INSERT INTO `medidas` (`med_id`, `med_exp_id`, `med_blc_id`, `med_par_id`, `med_plt_id`, `med_alt_planta`, `med_larg_folha`, `med_tam_folha`, `med_fen_id`, `med_data`, `med_imagem`) VALUES
-(1, 1, 1, 1, 1, 0.2, 0.05, 0.1, 1, '2017-11-01', 'Milho.jpg'),
-(2, 1, 1, 1, 2, 0.5, 0.15, 0.2, 1, '2017-10-25', 'Milho2.jpg'),
+(1, 1, 2, 2, 1, 0.2, 0.05, 0.1, 1, '2017-11-01', 'Milho.jpg'),
+(2, 1, 1, 1, 10, 0.5, 0.15, 0.2, 1, '2017-10-25', 'Milho2.jpg'),
 (3, 2, 3, 1, 1, 0.1, 0.1, 0.1, 2, NULL, 'Milho.jpg'),
 (4, 4, 2, 2, 3, 1.23, 0.5, 0.3, 2, NULL, 'Soja.jpg'),
 (5, 4, 2, 3, 10, 1, 0.3, 0.2, 4, NULL, 'Soja.jpg'),
-(6, 2, 3, 2, 12, 1, 0.5, 0.8, 7, NULL, 'download.png'),
-(7, 1, 2, 1, 10, 2, 1, 1.5, 10, NULL, 'Soja.jpg'),
+(6, 2, 5, 2, 12, 1, 0.5, 0.8, 7, NULL, 'download.png'),
+(16, 6, 1, 1, 3, 30, 5, 4, 4, '2017-11-23', NULL),
 (8, 4, 4, 2, 12, 2, 1, 1.3, 7, NULL, ''),
-(9, 2, 3, 3, 11, 3, 2, 2.1, 17, NULL, 'download.png');
+(9, 2, 3, 3, 11, 3, 2, 2.1, 17, NULL, 'download.png'),
+(10, 7, 1, 1, 1, 10, 5, 8, 1, '2017-11-23', 'images/1511462081879-1087458832.jpg'),
+(11, 6, 1, 1, 1, 2, 3, 5, 3, '2017-11-23', NULL),
+(12, 8, 2, 1, 10, 120, 10, 60, 4, '2017-11-23', NULL),
+(13, 7, 11, 1, 5, 123, 23, 23, 3, '2017-11-23', NULL),
+(15, 6, 1, 2, 4, 2, 4, 5, 4, '2017-11-23', NULL),
+(17, 7, 1, 1, 1, 10, 5, 8, 17, '2017-11-23', 'images/1511462081879-1087458832.jpg'),
+(18, 14, NULL, 1, 1, 0.5, 0.25, 1, 1, '2017-11-28', 'tmp/4c36f26b2bb220fed131fcde4e2a1b9b.jpg'),
+(19, 19, 2, 2, 1, 2, 1, 0.5, 2, '2017-11-28', NULL),
+(20, 19, 12, 3, 2, 1, 1, 1, 3, '2017-11-28', 'diferencas-vegetarianos1.gif'),
+(21, 14, 4, 1, 6, 2, 2, 2, 2, '2017-11-28', NULL),
+(22, 19, 5, 2, 9, 1, 1, 1, 10, '2017-11-28', NULL),
+(23, 14, 12, 3, 19, 2, 2, 2, 20, '2017-11-28', 'tmp/42060f024720a5985c4ffd05197a6392.jpg'),
+(25, 23, 1, 2, 1, 2, 1, 0.5, 1, '2017-11-28', 'diferencas-vegetarianos1.gif'),
+(24, 19, 10, 3, 17, 5, 5, 5, 20, '2017-11-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -425,7 +461,57 @@ INSERT INTO `system_access_log` (`id`, `sessionid`, `login`, `login_time`, `logo
 (93, '4oh36eld7qppsd4huic8ee4da4', 'admin', '2017-11-02 16:42:00', '2017-11-06 22:25:37'),
 (94, 'tlgck6dav6t4q98ic82rjmrn15', 'admin', '2017-11-02 16:42:34', NULL),
 (95, 'j72oi277bibh7q6f97b7fnik80', 'admin', '2017-11-06 22:26:57', '2017-11-06 22:27:03'),
-(96, 'qe7h3sqb6f42tb9m4esam1g6m1', 'admin', '2017-11-06 22:27:56', NULL);
+(96, 'qe7h3sqb6f42tb9m4esam1g6m1', 'admin', '2017-11-06 22:27:56', NULL),
+(97, '02q01tq9c6uga1qh5pqohentu2', 'admin', '2017-11-13 02:18:29', NULL),
+(98, 'dsko2glliu640hl88eor34ki36', 'admin', '2017-11-13 03:03:06', NULL),
+(99, 'ca44664peajk4v9359g7uh8im3', 'admin', '2017-11-13 17:41:46', '2017-11-13 17:42:27'),
+(100, 'tef8dnffsh41lni0ma1g06aqg0', 'admin', '2017-11-16 03:40:41', '2017-11-16 05:26:34'),
+(101, 'h0q6j2a32orlum5j0fhv3hs8j5', 'admin', '2017-11-16 04:20:36', NULL),
+(102, 'rfbav4o074tpsg3m0i28l0t3u6', 'admin', '2017-11-16 05:26:37', NULL),
+(103, 'cm1cvcklrg92cnja6s6fksmpt5', 'admin', '2017-11-20 23:35:23', '2017-11-20 23:39:00'),
+(104, 'sl5ktdp8cpilmjo0seduusak62', 'admin', '2017-11-21 02:31:38', '2017-11-21 02:36:11'),
+(105, '9jthl9n8779k32gdnok5nrek05', 'mirta', '2017-11-21 02:36:21', '2017-11-21 02:37:09'),
+(106, 'vlpnab63clfqhaifjvt5ttd645', 'admin', '2017-11-21 02:37:12', '2017-11-21 02:41:20'),
+(107, 'ec6ni4ihqkldobj2m8pdjbr923', 'laudenir', '2017-11-21 02:41:26', '2017-11-21 02:43:39'),
+(108, '73mfmlmsmar2be1jll2i4b62m2', 'mirta', '2017-11-23 17:53:44', '2017-11-23 17:54:17'),
+(109, '4m5uvnfjt2brhug6rh3lj5l767', 'Leonardo', '2017-11-23 18:04:22', '2017-11-23 18:18:47'),
+(110, 'hncgmo2u3svdo016j42pce8004', 'LAUDENIR', '2017-11-23 18:04:23', NULL),
+(111, 'b2rga7u95lcogmndhun6jsqjg2', 'mirta', '2017-11-23 18:04:47', NULL),
+(112, '8j78pi9vjd9ajt7b1tqamp6t34', 'admin', '2017-11-23 18:10:31', '2017-11-23 18:13:17'),
+(113, 'o7sv4grr304kdqvgsgl47044k6', 'mirta', '2017-11-23 18:12:34', NULL),
+(114, '51digvtdts30d0ui3v5bous8o3', 'laudenir', '2017-11-23 18:13:25', '2017-11-23 18:13:35'),
+(115, '5p8ijvk4bkd83lj4ptmtp3qfh0', 'admin', '2017-11-23 18:13:38', '2017-11-23 18:13:48'),
+(116, '8ilpicjitu8fdqq7eeb9vjkjf7', 'mirta', '2017-11-23 18:14:55', '2017-11-23 18:19:11'),
+(117, 'o5lpoin3u8ab153nfetsi6tia4', 'Leonardo', '2017-11-23 18:18:54', NULL),
+(118, '90h3ssrutcpv7bf39he1mm5vb4', 'admin', '2017-11-23 18:19:48', NULL),
+(119, 'dlcb063h2rksi69gb31d9oi1f5', 'marilia', '2017-11-23 18:25:42', NULL),
+(120, 'jqa5pf44a4sf0t9et0jvofj360', 'LAUDENIR', '2017-11-23 19:10:06', NULL),
+(121, 'npt3vtkd6sbrsai8i9ao7dhpm5', 'admin', '2017-11-28 03:32:55', '2017-11-28 03:54:36'),
+(122, 'bdrufk7k6cv02cimgakhd3ake0', 'laudenir', '2017-11-28 03:54:44', '2017-11-28 03:54:53'),
+(123, 'du3s5l4bb5lv7il2o1t1hpaev2', 'admin', '2017-11-28 03:54:55', '2017-11-28 04:24:52'),
+(124, '4no5op8lfrchjpdessjnklvta4', 'laudenir', '2017-11-28 04:25:00', '2017-11-28 04:38:16'),
+(125, 'obj082e17leb8rv3n05dcasmi4', 'mirta', '2017-11-28 04:38:23', NULL),
+(126, 'a2rj7i5q8j8f6s5ugjnncq7ah6', 'mirta', '2017-11-28 17:27:52', '2017-11-28 18:08:46'),
+(127, 'hcel6nvkrjlc2r9o2umg84l225', 'laudenir', '2017-11-28 18:09:32', '2017-11-28 18:16:36'),
+(128, 'esis2f4g2qp9lkppbvi76r66n2', 'marilia', '2017-11-28 18:16:42', '2017-11-28 22:13:29'),
+(129, '4vp9hui3jlv1nnl4mtkqu8dsl4', 'marilia', '2017-11-28 22:13:40', '2017-11-28 22:14:12'),
+(130, '4fgqvsqmfkukhm6655871i5oa0', 'admin', '2017-11-28 22:14:15', '2017-11-28 22:15:23'),
+(131, '0muj2ippcp4tbc2qtu32esta43', 'marilia', '2017-11-28 22:15:30', '2017-11-28 22:15:41'),
+(132, 'f9iv4769rgej03sf5k5qdmrb87', 'admin', '2017-11-28 22:15:43', '2017-11-28 22:16:02'),
+(133, '6qihitndgusi2cque9l1i8hn35', 'marilia', '2017-11-28 22:16:07', '2017-11-28 22:16:26'),
+(134, '9b3v935i1jnptb7sbb7qfmh9s4', 'marilia', '2017-11-28 22:16:32', '2017-11-28 22:16:48'),
+(135, 'mnqqmveffrp5i716jn7dshj9d1', 'admin', '2017-11-28 22:16:50', '2017-11-28 22:17:17'),
+(136, 'ij141cm5dao4c3gvkut31gukp3', 'teste', '2017-11-28 22:17:22', '2017-11-28 22:23:07'),
+(137, 'je4fkna90lblivur6i6rhpbch1', 'admin', '2017-11-28 22:23:09', '2017-11-28 22:23:25'),
+(138, 'ser97j9f1gko946r3sk0itqc23', 'teste', '2017-11-28 22:23:30', '2017-11-28 22:24:32'),
+(139, '72hckd51gp7a2cet37a8s97pe0', 'marilia', '2017-11-28 22:24:37', '2017-11-28 22:35:55'),
+(140, 'u02l4pb2cc1h5ds4af47sntcc1', 'teste', '2017-11-28 22:35:59', '2017-11-28 22:36:21'),
+(141, 'ujsnb3222k37it5hqk7jdkb6r7', 'marilia', '2017-11-28 22:36:26', '2017-11-28 22:37:17'),
+(142, '142j84rseob510hej32o04jp64', 'marilia', '2017-11-28 22:37:22', '2017-11-28 22:38:33'),
+(143, '059ps9ii8u5is41lbdsu7f6o60', 'marilia', '2017-11-28 22:38:38', '2017-11-28 23:03:05'),
+(144, '86d751573ve19ntmgsl2k1see1', 'teste', '2017-11-28 23:11:03', '2017-11-28 23:31:06'),
+(145, '50ejti8qnm9uimogdndjgftlr6', 'admin', '2017-11-28 23:31:18', '2017-11-28 23:32:13'),
+(146, 'uvdo04ltqmfi6adm2dmjbisks5', 'teste', '2017-11-28 23:32:19', '2017-11-29 00:19:47');
 
 -- --------------------------------------------------------
 
@@ -450,7 +536,8 @@ CREATE TABLE `system_document` (
 
 INSERT INTO `system_document` (`id`, `system_user_id`, `title`, `description`, `category_id`, `submission_date`, `archive_date`, `filename`) VALUES
 (1, 1, 'Notas', 'Lab II', 1, '2017-10-18', '2017-10-25', 'NotasT1T2_site.pdf'),
-(2, 1, 'Teste2', 'Testeteste', 2, '2017-10-27', '2017-11-04', 'BaseCasosTruco.ods');
+(2, 1, 'Teste2', 'Testeteste', 2, '2017-10-27', '2017-11-04', 'BaseCasosTruco.ods'),
+(3, 7, 'SomaTérmica', 'Teste', 2, '2017-11-28', '2017-11-28', '4_Métodos_Soma térmica.xlsx');
 
 -- --------------------------------------------------------
 
@@ -489,7 +576,8 @@ CREATE TABLE `system_document_group` (
 
 INSERT INTO `system_document_group` (`id`, `document_id`, `system_group_id`) VALUES
 (1, 1, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -581,25 +669,29 @@ INSERT INTO `system_group_program` (`id`, `system_group_id`, `system_program_id`
 (56, 1, 37),
 (55, 1, 38),
 (54, 1, 41),
-(50, 2, 42),
-(49, 2, 41),
-(48, 2, 40),
-(47, 2, 39),
-(46, 2, 38),
-(45, 2, 37),
-(44, 2, 36),
-(43, 2, 35),
-(42, 2, 34),
-(41, 2, 33),
-(40, 2, 32),
-(39, 2, 31),
-(38, 2, 13),
-(37, 2, 12),
-(36, 2, 10),
-(51, 2, 23),
-(52, 2, 24),
+(109, 2, 24),
+(108, 2, 23),
+(107, 2, 10),
+(106, 2, 12),
+(105, 2, 31),
+(104, 2, 32),
+(103, 2, 33),
+(102, 2, 34),
+(101, 2, 35),
+(100, 2, 36),
+(99, 2, 37),
+(98, 2, 38),
+(97, 2, 39),
+(96, 2, 40),
+(95, 2, 41),
+(94, 2, 42),
+(93, 2, 43),
 (53, 1, 43),
-(89, 1, 45);
+(89, 1, 45),
+(92, 2, 44),
+(91, 2, 21),
+(90, 2, 13),
+(110, 2, 22);
 
 -- --------------------------------------------------------
 
@@ -680,7 +772,10 @@ INSERT INTO `system_user_group` (`id`, `system_user_id`, `system_group_id`) VALU
 (7, 2, 2),
 (3, 1, 1),
 (5, 3, 2),
-(6, 4, 2);
+(6, 4, 2),
+(8, 5, 2),
+(9, 6, 2),
+(10, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -900,7 +995,7 @@ ALTER TABLE `cultura`
 -- AUTO_INCREMENT for table `experimentos`
 --
 ALTER TABLE `experimentos`
-  MODIFY `exp_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `exp_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `fenologia`
 --
@@ -915,12 +1010,12 @@ ALTER TABLE `local`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `lgn_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `lgn_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `medidas`
 --
 ALTER TABLE `medidas`
-  MODIFY `med_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `med_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `parcelas`
 --
