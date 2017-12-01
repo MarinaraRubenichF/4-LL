@@ -1,4 +1,9 @@
 <menu>
+    <menuitem label='Página Inicial'>
+       <icon>fa:home fa-fw</icon>
+       <action>WelcomeView</action>
+    </menuitem>
+
     <menuitem label='_t{Administration}'>
         <icon>fa:university fa-fw</icon>
         <menu>
@@ -69,6 +74,10 @@
               <menuitem label='Listar/Editar'>
                   <icon>fa:hand-o-right fa-fw</icon>
                   <action>ExperimentoList</action>
+              </menuitem>
+              <menuitem label='Medidas -> Cad. Nova'>
+                  <icon>fa:hand-o-right fa-fw</icon>
+                  <action>MedidaForm</action>
               </menuitem>
               <menuitem label='Medidas -> Listar/Editar'>
                   <icon>fa:hand-o-right fa-fw</icon>
