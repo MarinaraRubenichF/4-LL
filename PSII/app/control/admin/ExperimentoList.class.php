@@ -37,10 +37,6 @@ class ExperimentoList extends TStandardList
             $criteria->add(new TFilter('exp_usr_id','=',TSession::getValue('userid')));
             parent::setCriteria($criteria);
         }
-        //if(TSession::getValue('userid') != 1){
-            $crit = new TCriteria();
-            $crit->add(new TFilter('lgn_id','in','(SELECT exp_usr_id from experimentos where exp_usr_id = ' . TSession::getValue('userid') . ')'));
-        //}
         
         // create the form fields
         $exp_id = new TEntry('exp_id');
@@ -67,7 +63,7 @@ class ExperimentoList extends TStandardList
 
         // creates the datagrid columns
         // Dados da tabela para os campos da listagem
-        //$column_id = new TDataGridColumn('exp_id', 'Id', 'center', 50);
+        $column_id = new THidden('exp_id', 'Id', 'center', 50);
         $column_nome = $this->datagrid->addQuickColumn('Nome', 'exp_nome', 'center', 100);
         $column_usr_id = $this->datagrid->addQuickColumn('Usuário', 'nome_usuario->lgn_usr_nome', 'center', 50);
         $column_dt_hr = $this->datagrid->addQuickColumn('Data/Hora', 'exp_dt_hr', 'center', 150);
@@ -80,6 +76,9 @@ class ExperimentoList extends TStandardList
         $column_espac = $this->datagrid->addQuickColumn('Espaçamento', 'exp_espac', 'center', 50);
         $column_desc = $this->datagrid->addQuickColumn('Descrição', 'exp_desc', 'center', 250);
         $column_local = $this->datagrid->addQuickColumn('Local', 'local->lcl_nome', 'center', 100);
+
+        $column_dt_hr->setTransformer(array($this, 'formatDate'));
+
         /*$column_imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
         // aplica transformações
@@ -129,7 +128,10 @@ class ExperimentoList extends TStandardList
         parent::add($container);
     }
 
-    public function onEdit($param)
+
+    public function formatDate($column_dt_hr, $object)
     {
+        $dt = new DateTime($column_dt_hr);
+        return $dt->format('d/m/Y h:i');
     }
 }

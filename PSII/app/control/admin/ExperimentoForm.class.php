@@ -6,6 +6,7 @@
 class ExperimentoForm extends TStandardForm
 {
     protected $form; // form
+
     
     /**
      * Class constructor
@@ -19,26 +20,27 @@ class ExperimentoForm extends TStandardForm
         $this->setActiveRecord('Experimento');     // defines the active record
         
         // creates the form
-         $this->form = new TQuickForm('form_Experimento');
+        $this->form = new TQuickForm('form_Experimento');
         $this->form->class = 'tform';
         $this->form->setFormTitle('Experimentos');
-        
-        //if(TSession::getValue('userid') != 1){
+
+        if(TSession::getValue('userid') != 1){
             $crit = new TCriteria();
-            $crit->add(new TFilter('lgn_id','in','(SELECT exp_usr_id from experimentos where exp_usr_id = ' . TSession::getValue('userid') . ')'));
+            $crit->add(new TFilter('lgn_id','in','(SELECT lgn_id from login where lgn_id = ' . TSession::getValue('userid') . ')'));
+        }
 
         // create the form fields
-        $exp_id = new TEntry('exp_id');
+        $exp_id = new THidden('exp_id');
         $exp_usr_id = new TDBCombo('exp_usr_id','webrural','Usuario','lgn_id','lgn_usr_nome','', $crit);
-        //$exp_usr_id = new TEntry('exp_usr_id');
         $exp_nome = new TEntry('exp_nome');
         $exp_desc = new TText('exp_desc');
         $exp_dt_hr = new TDateTime('exp_dt_hr');
-        $exp_local = new TDBCombo('exp_lcl_id','webrural','Local','lcl_id','lcl_nome');
+        $exp_lcl_id = new TDBCombo('exp_lcl_id','webrural','Local','lcl_id','lcl_nome');
         $exp_clt_id = new TDBCombo('exp_clt_id','webrural','Cultura','clt_id','clt_nome');
         $exp_tip_id = new TDBCombo('exp_tip_id','webrural','Tipo','tip_id','tip_nome');
         $exp_num_lin = new TSpinner('exp_num_lin');
         $exp_num_col = new TSpinner('exp_num_col');
+        $exp_num_plts = new TSpinner('exp_num_plts');
         $exp_espac = new TEntry('exp_espac');
         $exp_imagem = new TFile('exp_imagem');
 
@@ -48,36 +50,24 @@ class ExperimentoForm extends TStandardForm
         $exp_dt_hr->setValue( date('Y-m-d H:i') );
         $exp_num_lin->setRange(1,100,1); 
         $exp_num_col->setRange(1,100,1);
-        $exp_imagem->setCompleteAction(new TAction(array($this, 'onComplete')));
+        $exp_num_plts->setRange(1,100,1);
 
         // add the fields
         $this->form->addQuickField('Id', $exp_id, '20%');
-        $this->form->addQuickField('Nome', $exp_nome, '50%');
-        $this->form->addQuickField('Descrição', $exp_desc, '50%');
-        $this->form->addQuickField('Usuário', $exp_usr_id, '50%');
-        $this->form->addQuickField('Data/hora', $exp_dt_hr, '50%');
-        $this->form->addQuickField('Cultura', $exp_clt_id, '50%');
-        $this->form->addQuickField('Local', $exp_local, '50%');
-        $this->form->addQuickField('Tipo', $exp_tip_id, '50%');
-        $this->form->addQuickField('Linhas / Tratamentos', $exp_num_lin, '20%');
-        $this->form->addQuickField('Colunas / Repetições', $exp_num_col, '20%');
-        $this->form->addQuickField('Espaçamento', $exp_espac, '20%');
-        $this->form->addQuickField('Imagem', $exp_imagem, '50%');
-
-        /*$this->form->addFields( [new TLabel('Id')], [$exp_id, ('Nome'), $exp_nome] );
-        $this->form->addFields( [new TLabel('Descrição')], [$exp_desc] );
-        $this->form->addFields( [new TLabel('Usuário')], [$exp_usr_id, ('Data/hora'), $exp_dt_hr] );
-        $this->form->addFields( [new TLabel('Cultura')], [$exp_clt_id, ('Local'), $exp_local] );
-        $this->form->addFields([new TLabel('Linhas')], [$exp_num_lin, ('Colunas'), $exp_num_col, ('Espaçamento'), $exp_espac]);*/
+        $this->form->addQuickField('Nome', $exp_nome, '90%');
+        $this->form->addQuickField('Descrição', $exp_desc, '90%');
+        $this->form->addQuickField('Usuário', $exp_usr_id, '90%');
+        $this->form->addQuickField('Data/hora', $exp_dt_hr, '90%');
+        $this->form->addQuickField('Cultura', $exp_clt_id, '90%');
+        $this->form->addQuickField('Local', $exp_lcl_id, '90%');
+        $this->form->addQuickField('Tipo', $exp_tip_id, '90%');
+        $this->form->addQuickField('Linhas / Tratamentos', $exp_num_lin, '30%');
+        $this->form->addQuickField('Colunas / Repetições', $exp_num_col, '30%');
+        $this->form->addQuickField('Nº Plantas Amostra', $exp_num_plts, '30%');
+        $this->form->addQuickField('Espaçamento (em metros)', $exp_espac, '30%');
+        $this->form->addQuickField('Imagem', $exp_imagem, '90%');
 
         $exp_id->setEditable(FALSE);
-        
-        $this->frame = new TElement('div');
-        $this->frame->id = 'photo';
-        $this->frame->style = 'width:400px;height:auto;min-height:200px;border:1px solid gray;padding:4px;';
-        $row = $this->form->addRow();
-        $row->addCell('');
-        $row->addCell($this->frame);
 
         // create the form actions
         $this->form->addQuickAction(_t('Save'), new TAction(array($this, 'onSave')), 'fa:floppy-o');
@@ -85,32 +75,21 @@ class ExperimentoForm extends TStandardForm
         $this->form->addQuickAction('Nova Cultura',  new TAction(array('CulturaForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Novo Bloco',  new TAction(array('BlocoForm', 'onEdit')), 'fa:plus-circle red');
         $this->form->addQuickAction('Novo Local',  new TAction(array('LocalForm', 'onEdit')), 'fa:plus-circle red');
-        $this->form->addQuickAction('Novo Usuário',  new TAction(array('UsuarioForm', 'onEdit')), 'fa:user-plus red');
-        $this->form->addQuickAction('Ir para a Listagem',new TAction(array('ExperimentoList','onReload')),'fa:table blue');
+        //$this->form->addQuickAction('Novo Usuário',  new TDataGridAction(array('UsuarioForm', 'onEdit')), 'fa:user-plus red');
+        $this->form->addQuickAction('Ir para a Listagem',new TDataGridAction(array('ExperimentoList','onReload')),'fa:table blue');
         
         // vertical box container
         $container = new TVBox;
-        $container->style = 'width: 90%';
+        $container->style = 'width: 100%';
         $container->add(new TXMLBreadCrumb('menu.xml', 'ExperimentoForm'));
         $container->add($this->form);
         
         parent::add($container);
     }
 
-     /**
-     * On complete upload
-     */
-    public static function onComplete($param)
-    {
-        //new TMessage('info', 'Upload completed: '.$param['exp_imagem']);
-        
-        // refresh photo_frame
-        TScript::create("$('#photo').html('')");
-        TScript::create("$('#photo').append(\"<img style='width:100%' src='tmp/{$param['exp_imagem']}'>\");");
-    }
     
     /**
-     * Edit product
+     * Edit
      */
     public function onEdit($param)
     {
@@ -119,7 +98,26 @@ class ExperimentoForm extends TStandardForm
         {
             $image = new TImage($object->exp_imagem);
             $image->style = 'width: 100%';
-            $this->frame->add( $image );
+        }
+
+         try 
+         {
+            if (isset($param['key'])) {
+                $key = $param['key'];  // obtém o parâmetro $key
+                
+                TTransaction::open('webrural'); // abre a transação
+                $data = new Experimento($key); // instancia o Active Record
+                
+                $this->form->setData($data); // preenche o form
+                TTransaction::close(); // fecha a transação
+            }
+            else {
+                $this->form->clear();
+            }
+           
+        } 
+        catch (Exception $e) {
+            new TMessage('error', $e->getMessage());
         }
     }
     
@@ -129,39 +127,66 @@ class ExperimentoForm extends TStandardForm
      */
     public function onSave()
     {
-        // first, use the default onSave()
-        $object = parent::onSave();
-        
-        // if the object has been saved
-        if ($object instanceof Experimento)
+        $data = $this->form->getData();
+        $this->form->setData($data);
+
+        try
         {
-            $source_file   = 'tmp/'.$object->exp_imagem;
-            $target_file   = 'images/'.$object->exp_imagem;
-            $finfo         = new finfo(FILEINFO_MIME_TYPE);
+            // open a transaction with database 'permission'
+            TTransaction::open('webrural');
+
+            // first, use the default onSave()
+            $object = parent::onSave();
             
-            // if the user uploaded a source file
-            if (file_exists($source_file) AND ($finfo->file($source_file) == 'image/png' OR $finfo->file($source_file) == 'image/jpeg'))
+            // if the object has been saved
+            if ($object instanceof Experimento)
             {
-                // move to the target directory
-                rename($source_file, $target_file);
-                try
+                $source_file   = 'tmp/'.$object->exp_imagem;
+                $target_file   = 'app/images/'.$object->exp_imagem;
+                $finfo         = new finfo(FILEINFO_MIME_TYPE);
+                
+                // if the user uploaded a source file
+                if (file_exists($source_file) AND ($finfo->file($source_file) == 'image/png' OR $finfo->file($source_file) == 'image/jpeg'))
                 {
-                    TTransaction::open('webrural');
-                    // update the photo_path
-                    $object->exp_imagem = 'images/'.$object->exp_imagem;
-                    $object->store();
-                    
-                    TTransaction::close();
+                    // move to the target directory
+                    //rename($source_file, $target_file)
+                        
+                        // update the photo_path
+                        $object->exp_imagem = 'tmp/'.$object->exp_imagem;
+                        $object->store();
                 }
-                catch (Exception $e) // in case of exception
-                {
-                    new TMessage('error', $e->getMessage());
-                    TTransaction::rollback();
-                }
+                $image = new TImage($object->exp_imagem);
+                $image->style = 'width: 100%';
             }
-            $image = new TImage($object->exp_imagem);
-            $image->style = 'width: 100%';
-            $this->frame->add( $image );
+
+            $dat = new Experimento();
+            $dat->exp_id = $data->exp_id;
+            $dat->exp_nome = $data->exp_nome;
+            $dat->exp_desc = $data->exp_desc;
+            $dat->exp_dt_hr = $data->exp_dt_hr;
+            $dat->exp_lcl_id = $data->exp_lcl_id;
+            $dat->exp_clt_id = $data->exp_tip_id;
+            $dat->exp_tip_id = $data->exp_tip_id;
+            $dat->exp_num_lin = $data->exp_num_lin;
+            $dat->exp_num_col = $data->exp_num_col;
+            $dat->exp_num_plts = $data->exp_num_plts;
+            $dat->exp_espac = $data->exp_espac;
+            $dat->exp_imagem = $data->exp_imagem;
+            $dat->store();
+            
+            $action = new TAction(array('ExperimentoList', 'onReload'));
+            new TMessage('info', 'Registro Salvo', $action);
+
+            // close the transaction
+            TTransaction::close();
+        }
+        catch (Exception $e) // in case of exception
+        {
+            // shows the exception error message
+            new TMessage('error', $e->getMessage());
+            
+            // undo all pending operations
+            TTransaction::rollback();
         }
     }
 }

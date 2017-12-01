@@ -46,6 +46,7 @@ class VisaoGeralView extends TStandardList
         $cultura = $this->datagrid->addQuickColumn('Cultura', 'experimento->cultura->clt_nome', 'left'); 
         $parcelas = $this->datagrid->addQuickColumn('Nº Parcelas','= {experimento->exp_num_lin} * {experimento->exp_num_col}', 'left');
         $parcela = $this->datagrid->addQuickColumn('Parcela','parcela->par_nome', 'left');
+        $bloco = $this->datagrid->addQuickColumn('Bloco','bloco->blc_nome', 'left');
         $planta = $this->datagrid->addQuickColumn('Planta','planta->plt_nome', 'left');
         $alt_planta = $this->datagrid->addQuickColumn('Altura da Planta','med_alt_planta', 'left');
         $larg_folha = $this->datagrid->addQuickColumn('Largura da Folha','med_larg_folha', 'left');
@@ -53,12 +54,14 @@ class VisaoGeralView extends TStandardList
         $fenologia = $this->datagrid->addQuickColumn('Fenologia','fenologia->fen_fenologia', 'left');
         $imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
 
+        $data_hora->setTransformer(array($this, 'formatDate'));
+
         $this->form->addQuickAction('CSV',  new TAction(array($this, 'onExportCSV')), 'fa:file-excel-o' );
 
         // aplica transformações
         $imagem->setTransformer(function($image, $object) {
             //return new TImage($object->med_imagem);
-            $link = "<a target='_blank' style='width:100%' href='app/images/{$object->med_imagem}'>Toque para ver</a>";
+            $link = "<a target='_blank' style='width:100%' href='tmp/{$object->med_imagem}'>Toque para ver</a>";
             return $link;
             //$a= new TImage($object->med_imagem); 
             //$a->style='width:50px'; // AQUI 
@@ -90,5 +93,11 @@ class VisaoGeralView extends TStandardList
     function onExportCSV()
     {
         $this->onSearch();
+    }
+
+    public function formatDate($data_hora, $object)
+    {
+        $dt = new DateTime($data_hora);
+        return $dt->format('d/m/Y h:i');
     }
 }

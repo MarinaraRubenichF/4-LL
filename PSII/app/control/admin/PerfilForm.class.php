@@ -77,8 +77,9 @@ class PerfilForm extends TPage
             $user->store();
             
             $this->form->setData($object);
-            
-            new TMessage('info', TAdiantiCoreTranslator::translate('Record saved'));
+
+            $action = new TAction(array('WelcomeView', 'onReload'));
+            new TMessage('info', 'Registro Salvo', $action);
             
             TTransaction::close();
         }
