@@ -43,12 +43,14 @@ class WelcomeView extends TStandardList
         $cultura = $this->datagrid->addQuickColumn('Cultura', 'cultura->clt_nome', 'left');
         $num_plantas = $this->datagrid->addQuickColumn('Nº Plantas Amostra','exp_num_plts', 'left');
         $parcelas = $this->datagrid->addQuickColumn('Nº Parcelas','= {exp_num_lin} * {exp_num_col}', 'left');
-        $imagem = $this->datagrid->addQuickColumn('Imagem', '', 'left');
+        $imagem = $this->datagrid->addQuickColumn('Imagem', 'med_imagem', 'left');
+
+        $data_hora->setTransformer(array($this, 'formatDate'));
 
         // aplica transformações
         $imagem->setTransformer(function($image, $object) {
             //return new TImage($object->exp_imagem);
-            $link = "<a target='_blank' style='width:100%' href='app/images/{$object->exp_imagem}'>Toque para ver</a>";
+            $link = "<a target='_blank' style='width:100%' href='tmp/{$object->exp_imagem}'>Toque para ver</a>";
             return $link;
             //$a = new TImage($object->exp_imagem); 
             //$a->style='width:50px'; // AQUI 
@@ -76,5 +78,11 @@ class WelcomeView extends TStandardList
         $container->add($this->pageNavigation);
         
         parent::add($container);
+    }
+
+    public function formatDate($data_hora, $object)
+    {
+        $dt = new DateTime($data_hora);
+        return $dt->format('d/m/Y h:i');
     }
 }
