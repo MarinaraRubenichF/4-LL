@@ -11,4 +11,8 @@ https://docs.google.com/document/d/1HkCQqcYNYJ7FJWN7Ow4gUh4MKCOO3FRo4v7lgMnZnu0/
 Link para o Cronograma:
 https://docs.google.com/spreadsheets/d/11GEggo9XHEVwgVvHp94_4CZjPNi-dcmxY-CHDrq3pFk/edit?usp=sharing
 
-Atualizações em breve!
+Testes de Usabilidade e comparações do sistema antes e depois do teste com os usuários se encontram no Wiki:
+https://github.com/MarinaraRubenichF/WebExperimentos/wiki
+
+Link para a presentação Final do projeto:
+https://drive.google.com/open?id=16pS6hKk7cc1szG3ilh6kqAVRnGaOCL1Y
